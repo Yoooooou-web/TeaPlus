@@ -1,0 +1,444 @@
+@charset "utf-8";
+
+
+
+.header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f8f8;
+    width: 100%;
+}
+
+.masked-bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    inset: 0;
+    z-index: 2;
+    transition: opacity 0.2s ease-out;
+    --mask-size: 200px 200px;
+    --green-opacity: 1;
+
+    isolation: isolate; /* 关键
+    强制 ::before 和 img 共享同一个渲染上下文
+    mask 的缩放、对齐会 100% 同步
+    这是解决你“缩放时绿色感觉没跟着走”的根本方案
+    这行是专业级 fix，不是 hack。 */
+}
+.masked-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #63b62f;
+
+    /* 和图片使用同一个 mask */
+    mask-image: url('../img/logo_2.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: var(--mask-size);
+
+    -webkit-mask-image: url('../img/logo_2.svg');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: var(--mask-size);
+
+    opacity: var(--green-opacity);
+    pointer-events: none;
+
+    z-index: 2;
+}
+.masked-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+
+    mask-image: url('../img/logo_2.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: var(--mask-size);
+
+    -webkit-mask-image: url('../img/logo_2.svg');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+
+
+.masked-bg .hero-text {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: #fff;
+    pointer-events: none;
+
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.35);
+
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.masked-bg .hero-text.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.masked-bg .hero-text h1 {
+    font-size: 66px;
+    font-family: "Times New Roman", serif;
+    /* font-family: "Times New Roman", serif; */
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin: 0;
+}
+
+.masked-bg .hero-text p {
+    margin-top: 18px;
+    font-size: 24px;
+    font-family: "Zen Old Mincho", serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    opacity: 0.85;
+}
+
+
+
+
+
+
+.scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+    z-index: 5;
+    opacity: 0;           /* 默认隐藏 */
+    pointer-events: none; /* 不挡滚轮 */
+
+    transition: opacity 0.6s ease;
+}
+
+
+/* 激活时才允许点击 */
+.scroll-hint.active {
+    pointer-events: auto;
+}
+
+.hint-inner {
+    display: flex;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+/* 按钮 */
+.hint-btn {
+    width: 70px;
+    /* height: 70px; */
+    cursor: pointer;
+    
+}
+.hint-btn .icon {
+    width: 100%;
+    height: 100%;
+    fill: currentColor; /* 避免后面改色用两套颜色系统 */
+    color: #fff;
+}
+
+
+/* 菜单 */
+.hint-menu {
+    display: flex;
+    flex-wrap: nowrap;   /* 不换行 */
+    gap: 24px;
+
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+
+    width: 0; /* 关键 */
+    overflow: hidden; /* 关键 */
+
+    transition: all 0.6s ease;
+}
+
+.scroll-hint.open .hint-menu {
+    width: auto; /* 展开后恢复宽度 */
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+
+    margin-left: 50px;
+
+}
+
+/* 菜单样式 */
+.hint-menu a {
+    position: relative;
+    padding: 8px 16px;
+    color: #fff;
+    /* background: #63b62f; */
+    /* border-radius: 20px; */
+    font-size: 24px;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.hint-menu a:hover {
+    /* background: #4e9b22; */
+    color: #63b62f;
+    opacity: 0.7;
+}
+.hint-menu a:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: -13px;                /* 紧贴右边 */
+    top: 50%;                /* 顶端到50% */
+    transform: translateY(-50%); /* 向上移动自身高度的一半，居中 */
+    height: 77%;            /* 竖线高度 */
+    width: 1px;             /* 竖线宽度 */
+    background-color: #fff; /* 竖线颜色 */
+}
+
+
+.logo_menu {
+    display: none;
+}
+
+
+
+
+
+
+.about {
+    max-width: 1200px;
+    margin: 300px auto;
+    font-size: 28px;
+    font-family: "Zen Old Mincho", serif;
+    font-weight: 900;
+    color: #636363;
+    line-height: 1.7;
+    text-align: center;
+}
+.about h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+
+.tya_type {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.tya_type li {
+    display: flex;
+    padding: 30px 0;
+}
+.tya_type li .t_img{
+    width: 300px;
+    flex-shrink: 0;
+}
+.tya_type li .t_img img {
+    width: 100%;
+    height: auto;
+}
+.tya_type li .text {
+    display: flex;
+    flex-direction: column;
+    color: #636363;
+    font-family: "Zen Old Mincho", serif;
+    margin: 15px 50px;
+}
+.tya_type li .text h1 {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0 7px;
+    font-size: 30px;
+    letter-spacing: 7px;
+    background: linear-gradient(transparent 50%, #d9ffc1 50%);
+}
+.tya_type li .text h2 {
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.8;
+}
+.tya_type li:nth-child(2n) {
+    flex-direction: row-reverse;
+}
+.tya_type li:nth-child(2n) .text {
+    text-align: right;
+}
+.tya_type li:nth-child(2n) .text h1 {
+    align-self: flex-end;
+}
+
+
+.access {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;  /* 内容最大宽度 */
+    margin: 200px auto;      /* 左右自动居中 */
+}
+.access .acc_img img {
+    width: 100%;
+    max-width: 500px;
+    min-width: 100px;
+    height: auto;
+}
+.access dl {
+    margin: auto;
+    padding-left: 80px;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
+}
+.access dl .xian {
+    display: grid;
+    height: 70px;
+    grid-template-columns: 120px minmax(0, 1fr);
+    border-top: 1px solid #000;
+}
+.access dl .xian:last-child {
+    border-bottom: 1px solid #000;
+}
+.access dl .xian dt {
+    text-align: justify;
+    text-align-last: justify;
+    margin: auto 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.access dl .xian dd {
+    margin: auto 0;
+    padding-left: 40px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+
+
+.map {
+    max-width: 1200px; 
+    margin: 100px auto;
+}
+.map iframe {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 600px;
+}
+
+
+
+.top {
+    position: fixed;
+    right: 20px;
+    bottom: 3%;
+    z-index: 3;
+    width: 50px;
+    height: 50px;
+    background-color: #aaa;
+    border-radius: 9%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+}
+.top.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.top:hover {
+    background-color: #c2c2c2;
+}
+.top:before {
+    display: block;
+    content: "❯❯";
+    color: #fff;
+    font-size: 150%;
+    font-weight: 500;
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease; 
+}
+.top:hover::before {
+    transform: rotate(-90deg) translateX(3px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------
+スマートフォン 
+------------------------------*/
+@media screen and (max-width: 767px) {
+
+    .scroll-hint {
+        display: none !important;
+    }
+    .logo_menu {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
+
+    .logo_menu.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .top {
+        display: none !important;
+    }
+
+    
+
+    .masked-bg .hero-text h1 {
+        font-size: 34px;
+        letter-spacing: 2px;
+    }
+
+    .masked-bg .hero-text p {
+        font-size: 14px;
+        letter-spacing: 1px;
+        margin-top: 12px;
+    }
+    
+
+
+}
