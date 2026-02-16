@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+
+
+main .grup {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 70px;
+}
+main .grup:nth-child(2n) {
+    flex-direction: row-reverse;
+}
+
+main .grup .img img {
+    height: 300px;
+}
+main .grup .text {
+    margin-left: 80px;
+    color: #636363;
+    line-height: 2;
+}
+main .grup:nth-child(2n) .text {
+    text-align: right;
+    margin-left: 0;
+    margin-right: 80px;
+}
+main .grup .text b {
+    font-size: 24px;
+    font-weight: 600;
+}
+main .grup:first-child .text b {
+    font-size: 66px;
+    font-family: "Long Cang", cursive;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1;
+}
+
+
+
+
+
+
+
+
+
+/*------------------------------
+スマートフォン 
+------------------------------*/
+@media screen and (max-width: 767px) {
+
+
+
+
+}
