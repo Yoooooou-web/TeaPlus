@@ -48,4 +48,61 @@
 
 
 
+/*------------------------------
+スマートフォン 
+------------------------------*/
+@media screen and (max-width: 767px) {
 
+    .grid_list {
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
+    
+    /* 分割线间距缩小 */
+    .grid_list::after {
+        margin-bottom: 50px;
+    }
+    
+    /* 大图区域 */
+    .grid_list .big_container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .grid_list .big_container p {
+        font-size: 26px;
+        padding-left: 5px;
+        margin-top: 10px;
+    }
+    
+    /* 小卡片区域改成2列 */
+    .grid_list .small_container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 20px;
+    }
+    
+    /* 小卡片高度取消固定 */
+    .grid_list .small_container div {
+        height: auto;
+    }
+    
+    /* 图片比例统一（高级感重点） */
+    .grid_list .small_container div img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+    
+    /* 文字 */
+    .grid_list .small_container div p {
+        font-size: 14px;
+        margin-top: 6px;
+    }
+    
+
+
+
+}

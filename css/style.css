@@ -106,6 +106,9 @@
     letter-spacing: 4px;
     margin: 0;
 }
+.mobile-break {
+    display: none; /* 默认不显示 */
+}
 
 .masked-bg .hero-text p {
     margin-top: 18px;
@@ -114,6 +117,7 @@
     font-weight: 400;
     letter-spacing: 2px;
     opacity: 0.85;
+    /* background: linear-gradient(transparent 50%, #63b62f 50%); */
 }
 
 
@@ -245,7 +249,7 @@
 
 .tya_type {
     max-width: 1200px;
-    margin: 50px auto;
+    margin: 50px auto 0;
 }
 
 .tya_type li {
@@ -398,10 +402,6 @@
 
 
 
-
-
-
-
 /*------------------------------
 スマートフォン 
 ------------------------------*/
@@ -415,6 +415,9 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.5s ease;
+
+        -webkit-tap-highlight-color: transparent; /* Chrome, Safari */
+        -webkit-touch-callout: none; /* iOS长按弹出菜单 */
     }
 
     .logo_menu.show {
@@ -428,16 +431,158 @@
 
     
 
+    .masked-bg img {
+        object-position: 5% center;
+    }
+
     .masked-bg .hero-text h1 {
-        font-size: 34px;
+        font-size: 36px;
         letter-spacing: 2px;
+        line-height: 1.5;
+        margin-bottom: 5px;
+    }
+    .mobile-break {
+        display: block; /* 触发换行 */
     }
 
     .masked-bg .hero-text p {
-        font-size: 14px;
+        font-size: 18px;
         letter-spacing: 1px;
         margin-top: 12px;
+        line-height: 2;
     }
+
+
+    .about {
+        margin: 260px auto;
+    }
+    .about h1 {
+        font-size: 33px;
+    }
+    .about h2 {
+        font-size: 16px;
+    }
+
+
+
+    .tya_type {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 0;
+        -ms-overflow-style: none;     /* IE */
+        scrollbar-width: none;        /* Firefox */
+    }
+    .tya_type::-webkit-scrollbar {
+        display: none;                /* Chrome / Safari */
+    }
+    
+    .tya_type li {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .tya_type li:nth-child(2n) {
+        flex-direction: column; /* 取消左右交错 */
+    }
+    .tya_type li .t_img {
+        width: 100%;
+        
+    }
+    .tya_type li .t_img img {
+        aspect-ratio: 1 / 1;   /* 宽高比 1:1 */
+        object-fit: cover;     /* 保持图片裁剪填满，不变形 */
+    }
+    .tya_type li .text {
+        margin: 25px 0 0 0;
+    }
+    .tya_type li:nth-child(2n) .text {
+        text-align: left;
+    }
+    .tya_type li:nth-child(2n) .text h1 {
+        align-self: flex-start;
+    }
+    .tya_type li .text h2 {
+        font-size: 15px;
+    }
+
+
+
+    .tya_progress {
+        width: 60%;
+        height: 1px;
+        background: rgba(0,0,0,0.15);
+        margin: auto ;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .tya_progress_inner {
+        height: 100%;
+        width: 15%;
+        background: #63b62f;
+        transform: translateX(0);
+        transition: transform 0.15s ease-out;
+        
+    }
+
+
+
+    .access {
+        flex-direction: column;   /* 改成上下结构 */
+        margin: 150px auto;
+        padding: 0 20px;
+        margin: 200px auto 0;      /* 左右自动居中 */
+
+    }
+    
+    .access .acc_img {
+        width: 100%;
+    }
+    
+    .access .acc_img img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .access dl {
+        flex: none;
+        padding-left: 0;
+        margin-top: 40px;
+    }
+    
+    .access dl .xian {
+        grid-template-columns: 75px 1fr;  /* 稍微缩小左列 */
+        height: auto;
+        padding: 14px 0;
+    }
+    
+    .access dl .xian dt {
+        font-size: 15px;
+        text-align-last: justify;
+    }
+    
+    .access dl .xian dd {
+        font-size: 14px;
+        padding-left: 30px;
+    }
+    
+
+
+    .map {
+        margin: 70px auto;
+    }
+    .map iframe {
+        width: 100%;
+        height: 300px;
+    }
+
+
     
 
 

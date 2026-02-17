@@ -49,6 +49,52 @@ main .grup:first-child .text b {
 ------------------------------*/
 @media screen and (max-width: 767px) {
 
+    main .grup {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 60px;
+    }
+    
+    /* 取消偶数反转 */
+    main .grup:nth-child(2n) {
+        flex-direction: column;
+    }
+    
+    /* 图片自适应 */
+    main .grup .img {
+        width: 100%;
+    }
+    
+    main .grup .img img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 6px;
+    }
+    
+    /* 文字部分 */
+    main .grup .text {
+        margin: 25px 0 0 0;
+        text-align: left;
+        line-height: 1.9;
+        font-size: 15px;
+    }
+    
+    /* 取消偶数右对齐 */
+    main .grup:nth-child(2n) .text {
+        text-align: left;
+        margin-right: 0;
+    }
+    
+    /* 标题字号微调 */
+    main .grup .text b {
+        font-size: 20px;
+    }
+    
+    main .grup:first-child .text b {
+        font-size: 42px;
+    }
+
 
 
 

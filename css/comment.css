@@ -67,7 +67,7 @@
 
 .comment-content {
     font-size: 15px;
-    color: #333;
+    color: #636363;
     margin-bottom: 10px;
 }
 
@@ -116,6 +116,62 @@
 スマートフォン 
 ------------------------------*/
 @media screen and (max-width: 767px) {
+
+    /* 缩小头像 */
+    .avatar {
+        width: 40px;
+    }
+
+    .avatar svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* 缩小评论框内边距和字体 */
+    .comment-box {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* 修复姓名和时间在一行 */
+    .comment-header {
+        display: flex;
+        justify-content: space-between; /* 姓名靠左，时间靠右 */
+        align-items: center;
+        flex-wrap: wrap; /* 防止换行 */
+    }
+
+    .comment-header .time {
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+
+    /* 缩小按钮 */
+    .comment-footer button {
+        padding: 5px 12px;
+        font-size: 13px;
+    }
+
+    /* 缩小气泡箭头 */
+    .comment-box::after {
+        left: -14px;
+        top: 16px;
+        border-width: 7px;
+    }
+
+    .comment-item:nth-child(2n) .comment-box::after {
+        left: 100%;
+        top: 16px;
+        border-width: 7px;
+        border-color: transparent transparent transparent #fff;
+        filter: drop-shadow(1px 0 0 #ddd);
+    }
+
+    /* 评论列表左右边距 */
+    .comment-list {
+        margin: 20px 15px;
+        max-width: 100%;
+    }
 
 
 

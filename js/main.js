@@ -12,6 +12,8 @@ let animationFinished = false; // 手机动画是否完成（或用户触发了�
 const logoMenu = document.querySelector('.logo_menu');
 const menuList = document.querySelector('.logo_menu_list');
 const heroText = document.querySelector('.hero-text');
+const slider = document.querySelector('.tya_type');
+const progress = document.querySelector('.tya_progress_inner');
 
 
 
@@ -22,6 +24,10 @@ const maxScale = 20;
 const minScale = 1;
 const greenFadeStart = 1;
 const greenFadeEnd = 4;
+
+
+
+
 
 
 
@@ -268,6 +274,40 @@ window.addEventListener('resize', initMaskScale);
             }, duration / steps);
         });
     }
+
+
+
+
+    // 图片滑块进度
+    function updateProgress() {
+    const slider = document.querySelector('.tya_type');
+    const progressContainer = document.querySelector('.tya_progress');
+    const progress = document.querySelector('.tya_progress_inner');
+
+    if (!slider || !progress || !progressContainer) return;
+
+    const scrollWidth = slider.scrollWidth;   // 总内容宽度
+    const clientWidth = slider.clientWidth;   // 可视宽度
+    const scrollLeft = slider.scrollLeft;     // 当前滚动
+
+    // 动态计算滑块宽度（可视比例）
+    const percentVisible = clientWidth / scrollWidth;
+    progress.style.width = `${Math.max(percentVisible * 100, 5)}%`; // 最小 5%
+
+    // 滑块位置百分比
+    const maxScroll = scrollWidth - clientWidth;
+    const percentScrolled = maxScroll > 0 ? scrollLeft / maxScroll : 0;
+
+    // 最大移动距离 = 容器宽度 - 滑块宽度
+    const progressWidth = progressContainer.getBoundingClientRect().width;
+    const sliderWidth = progress.getBoundingClientRect().width;
+    const maxMove = progressWidth - sliderWidth;
+
+    progress.style.transform = `translateX(${percentScrolled * maxMove}px)`;
+    }
+
+  
+    slider.addEventListener('scroll', updateProgress);
 
 
 
