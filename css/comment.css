@@ -3,15 +3,15 @@
 
 
 .comment-list {
-    max-width: 900px;
-    margin: 40px auto;
+    min-width: 1000px;
+    margin: 30px auto 60px;
     font-family: sans-serif;
 }
 
 .comment-item {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .avatar {
@@ -95,6 +95,7 @@
 }
 .comment-item:nth-child(2n) .avatar{
     margin-left: 15px;
+    margin-right: 0;
 }
 /* 小气泡箭头 */
 .comment-item:nth-child(2n) .comment-box::after {
@@ -169,8 +170,8 @@
 
     /* 评论列表左右边距 */
     .comment-list {
-        margin: 20px 15px;
-        max-width: 100%;
+        min-width: 200px;
+        padding: 0 13px;
     }
 
 
