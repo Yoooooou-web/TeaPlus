@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+.access {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;  /* 内容最大宽度 */
+    margin: 0 auto 200px;      /* 左右自动居中 */
+}
+.access .acc_img img {
+    width: 100%;
+    max-width: 500px;
+    min-width: 100px;
+    height: auto;
+}
+.access dl {
+    margin: auto;
+    padding-left: 80px;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
+}
+.access dl .xian {
+    display: grid;
+    height: 70px;
+    grid-template-columns: 120px minmax(0, 1fr);
+    border-top: 1px solid #000;
+}
+.access dl .xian:last-child {
+    border-bottom: 1px solid #000;
+}
+.access dl .xian dt {
+    text-align: justify;
+    text-align-last: justify;
+    margin: auto 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.access dl .xian dd {
+    margin: auto 0;
+    padding-left: 40px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+
+
+.map {
+    max-width: 1200px; 
+    margin: 100px auto;
+}
+.map iframe {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 600px;
+}
+
+
+
+
+
+
+
+
+/*------------------------------
+スマートフォン 
+------------------------------*/
+@media screen and (max-width: 767px) {
+
+    .access {
+        flex-direction: column;   /* 改成上下结构 */
+        margin: 150px auto;
+        padding: 0 20px;
+        margin: 0 auto;      /* 左右自动居中 */
+
+    }
+    
+    .access .acc_img {
+        width: 100%;
+    }
+    
+    .access .acc_img img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .access dl {
+        flex: none;
+        padding-left: 0;
+        margin-top: 40px;
+    }
+    
+    .access dl .xian {
+        grid-template-columns: 75px 1fr;  /* 稍微缩小左列 */
+        height: auto;
+        padding: 14px 0;
+    }
+    
+    .access dl .xian dt {
+        font-size: 15px;
+        text-align-last: justify;
+    }
+    
+    .access dl .xian dd {
+        font-size: 14px;
+        padding-left: 30px;
+    }
+    
+
+
+    .map {
+        margin: 70px auto;
+    }
+    .map iframe {
+        width: 100%;
+        height: 300px;
+    }
+
+    
+ 
+}
+
+
+
+
+
+
+
